@@ -3,7 +3,13 @@ pragma solidity ^0.8.13;
 import "../Interface/IFactory.sol";
 
 interface ICHILD {
-    function userCampaignReg(string memory _name) external;
+    struct Reg {
+        string name;
+        address user_address;
+        string email_address;
+    }
+
+    function userCampaignReg(Reg calldata _user) external;
 
     function createAttendance(
         bytes calldata _lectureId,

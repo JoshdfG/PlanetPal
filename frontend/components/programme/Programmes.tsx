@@ -183,14 +183,15 @@ const Programmes = ({ apiKey, secretKey }: any) => {
               type="button"
               className="text-color2 bg-white border border-color2 hover:bg-color2 hover:text-white rounded-lg flex items-center gap-1 text-sm py-2.5 px-6"
             >
-              Create new campaign <IoIosAddCircleOutline className="text-xl" />
+              Create new organisation{" "}
+              <IoIosAddCircleOutline className="text-xl" />
             </button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>PlanetPal</DialogTitle>
               <DialogDescription>
-                Create new campaign on PlanetPal
+                Create new organisation on PlanetPal
               </DialogDescription>
             </DialogHeader>
             <form className="w-full grid gap-4" onSubmit={handleSubmit}>
@@ -250,7 +251,7 @@ const Programmes = ({ apiKey, secretKey }: any) => {
                   htmlFor="adminName"
                   className="text-color3 font-medium ml-1"
                 >
-                  Admin Name
+                  Owners Name
                 </label>
                 <input
                   type="text"

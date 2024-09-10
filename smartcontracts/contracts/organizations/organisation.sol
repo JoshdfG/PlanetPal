@@ -32,7 +32,7 @@ contract organisation {
     bool public spokMinted;
     mapping(address => bool) requestNameCorrection;
 
-    bool public isCampaignOn;
+    bool public isCampaignOn = true;
 
     Campaign[] public campaigns;
 
@@ -66,11 +66,16 @@ contract organisation {
     struct Reg {
         string name;
         address user_address;
+        string email_address;
     }
     mapping(address => bool) isPresent;
     Reg[] public registered_users_data;
     mapping(address => bool) is_registered_user;
-    event UserCampaignRegistered(string name, address user_address);
+    event UserCampaignRegistered(
+        string name,
+        address indexed user_address,
+        string email_address
+    );
 
     /**
      * ============================================================ *
@@ -257,6 +262,7 @@ contract organisation {
             campaignInstance[_lectureId].attendanceStartTime = block.timestamp;
         }
         IndividualAttendanceRecord[msg.sender][_lectureId] = true;
+        usersTotalAttendance[msg.sender] = usersTotalAttendance[msg.sender] + 1;
 
         campaignInstance[_lectureId].usersPresent =
             campaignInstance[_lectureId].usersPresent +
@@ -346,20 +352,25 @@ contract organisation {
         emit Event.UserRegistered(_users.length);
     }
 
-    function userCampaignReg(string memory _name) external {
-        if (is_registered_user[msg.sender] == true)
-            revert Error.user_already_registered();
-        Reg memory new_user = Reg(_name, msg.sender);
+    function userCampaignReg(Reg calldata _user) external {
+        require(
+            !is_registered_user[_user.user_address],
+            "User already registered"
+        );
 
-        registered_users[msg.sender] = new_user;
-        indexInUsersArray[msg.sender] = users.length;
-        registered_users_data.push(new_user);
+        registered_users[_user.user_address] = _user;
 
-        is_registered_user[msg.sender] = true;
-        isPresent[msg.sender] = true;
-        registered_users[msg.sender].name = _name;
-        registered_users[msg.sender].user_address = msg.sender;
-        emit UserCampaignRegistered(_name, msg.sender);
+        indexInUsersArray[_user.user_address] = registered_users_data.length;
+        registered_users_data.push(_user);
+
+        is_registered_user[_user.user_address] = true;
+        isPresent[_user.user_address] = true;
+
+        emit UserCampaignRegistered(
+            _user.name,
+            _user.user_address,
+            _user.email_address
+        );
     }
 
     function getUserCampaignReg() external view returns (Reg[] memory) {
@@ -501,5 +512,9 @@ contract organisation {
 
     function getOrganizationStatus() external view returns (bool) {
         return isOngoing;
+    }
+
+    function getCampaignStatus() external view returns (bool) {
+        return isCampaignOn;
     }
 }

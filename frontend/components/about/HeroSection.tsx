@@ -1,5 +1,5 @@
 import Image from "next/image";
-import aboutUs from "../../public/guest/about1.png";
+import aboutUs from "../../public/guest/green_land.png";
 import { Button } from "../ui/button";
 import { MdRocketLaunch } from "react-icons/md";
 
@@ -21,21 +21,15 @@ const HeroSection = () => {
           </div>
         </main>
         <main className="md:h-full flex flex-col justify-center items-start md:gap-6 gap-4 md:pr-8">
-          <h4 className="text-color3">About Us</h4>
           <h1 className="lg:text-5xl md:text-3xl text-2xl text-color2 font-bold">
-            Revolutionizing Education with Blockchain Technology
+            Empowering a Sustainable Future with Planet Pal
           </h1>
           <p className="text-color3 md:text-lg">
-            Discover how Classmate leverages blockchain to provide secure,
-            transparent, and efficient student management and attendance
-            solutions. Join us in transforming the future of education.
+            Our mission is to inspire and enable individuals, communities, and
+            organizations to adopt eco-friendly habits and practices, promoting
+            a healthier planet for all. Join us in our vision to create a world
+            where sustainability and technology unite for a brighter future.
           </p>
-          <Button
-            type="button"
-            className="text-white bg-color1 hover:bg-color2 flex items-center gap-1"
-          >
-            Launch App <MdRocketLaunch className="text-xl" />
-          </Button>
         </main>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -397,6 +397,13 @@ export const OrganisationABI = [
   },
   {
     inputs: [],
+    name: "getCampaignStatus",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "getCampaigns",
     outputs: [
       {
@@ -463,8 +470,11 @@ export const OrganisationABI = [
   },
   {
     inputs: [{ internalType: "address", name: "_user", type: "address" }],
-    name: "getStudentAttendanceRatio",
-    outputs: [{ internalType: "bytes[]", name: "", type: "bytes[]" }],
+    name: "getUserAttendanceRatio",
+    outputs: [
+      { internalType: "uint256", name: "attendance", type: "uint256" },
+      { internalType: "uint256", name: "TotalCampaign", type: "uint256" },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -476,6 +486,7 @@ export const OrganisationABI = [
         components: [
           { internalType: "string", name: "name", type: "string" },
           { internalType: "address", name: "user_address", type: "address" },
+          { internalType: "string", name: "email_address", type: "string" },
         ],
         internalType: "struct organisation.Reg[]",
         name: "",
@@ -624,6 +635,7 @@ export const OrganisationABI = [
     outputs: [
       { internalType: "string", name: "name", type: "string" },
       { internalType: "address", name: "user_address", type: "address" },
+      { internalType: "string", name: "email_address", type: "string" },
     ],
     stateMutability: "view",
     type: "function",
@@ -696,7 +708,10 @@ export const OrganisationABI = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "string", name: "_name", type: "string" }],
+    inputs: [
+      { internalType: "string", name: "_name", type: "string" },
+      { internalType: "string", name: "_email", type: "string" },
+    ],
     name: "userCampaignReg",
     outputs: [],
     stateMutability: "nonpayable",

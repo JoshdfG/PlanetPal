@@ -9,6 +9,7 @@ import "../contracts/organizations/organisation.sol";
 import "../contracts/reward/RewardFactory.sol";
 
 contract EcosystemTest is Test {
+    
     organisationFactory _organisationFactory;
     RewardFactory _rewardFactory;
     individual user1;

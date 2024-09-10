@@ -1,0 +1,7 @@
+-include .env
+
+deployFuji:
+	@echo deploying all contracts
+	@forge script ./script/DeployAllContracts.s.sol --rpc-url ${FUJI}  --broadcast --etherscan-api-key ${FUJI_KEY} --verifier-url ${FUJI_API} --verify -vvvvv 
+
+

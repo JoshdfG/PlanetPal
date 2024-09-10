@@ -1,0 +1,124 @@
+type AttendanceSigned @entity(immutable: true) {
+  id: Bytes!
+  Id: Bytes! # bytes
+  signer: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CampaignCreated @entity(immutable: true) {
+  id: Bytes!
+  campaignName: String! # string
+  superAdmin: Bytes! # address
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CampaignStopped @entity(immutable: true) {
+  id: Bytes!
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Handover @entity(immutable: true) {
+  id: Bytes!
+  oldMentor: Bytes! # address
+  newMentor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserCampaignRegistered @entity(immutable: true) {
+  id: Bytes!
+  name: String! # string
+  user_address: Bytes! # address
+  email_address: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserRegistered @entity(immutable: true) {
+  id: Bytes!
+  no_of_users: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type adminRemoved @entity(immutable: true) {
+  id: Bytes!
+  no_of_admins: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type adminsRegistered @entity(immutable: true) {
+  id: Bytes!
+  noOfAdmins: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type attendanceClosed @entity(immutable: true) {
+  id: Bytes!
+  Id: Bytes! # bytes
+  mentor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type attendanceCreated @entity(immutable: true) {
+  id: Bytes!
+  lectureId: Bytes! # bytes
+  uri: String! # string
+  topic: String! # string
+  staff: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type attendanceOpened @entity(immutable: true) {
+  id: Bytes!
+  Id: Bytes! # bytes
+  mentor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type staffRemoved @entity(immutable: true) {
+  id: Bytes!
+  no_of_staffs: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type staffsRegistered @entity(immutable: true) {
+  id: Bytes!
+  noOfStaffs: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type topicEditted @entity(immutable: true) {
+  id: Bytes!
+  Id: Bytes! # bytes
+  oldTopic: String! # string
+  newTopic: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

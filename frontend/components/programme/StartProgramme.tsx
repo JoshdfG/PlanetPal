@@ -203,18 +203,30 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
       router.push("/viewprogramme");
     }
   };
+  interface Reg {
+    name: string;
+    user_address: `0x${string}`;
+    email_address: string;
+  }
+  const { registerUser, isWritingCampReg, isConfirmingCampReg } =
+    useUserCampaignReg();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [userAddress, setUserAddress] = useState("");
 
   const handleRegister = async () => {
-    await registerUser(name, email);
+    const user: Reg = {
+      name,
+      user_address: userAddress as `0x${string}`,
+      email_address: email,
+    };
+
+    await registerUser(user);
   };
 
   const campaigns = useGetCampaigns();
   console.log(campaigns);
-  const { registerUser, isWritingCampReg, isConfirmingCampReg } =
-    useUserCampaignReg();
 
   return (
     <section className="w-full flex flex-col gap-10">
@@ -601,9 +613,9 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                     <span className="font-bold">Description:</span>{" "}
                     {campaign.campaign_description}
                   </p>
-                  <p>
+                  {/* <p>
                     <span className="font-bold">Owner:</span> {campaign.owner}
-                  </p>
+                  </p> */}
                   <p className="text-red-300 my-2 text-xs font-bold">
                     Register to be added to the organisation
                   </p>{" "}
@@ -642,7 +654,10 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                       </DialogHeader>
                       <form
                         className="w-full grid gap-4"
-                        onSubmit={handleCreateCampaign}
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handleRegister();
+                        }}
                       >
                         <div className="w-full flex flex-col items-center"></div>
                         <div className="flex flex-col">
@@ -660,6 +675,24 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                             className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <label
+                            htmlFor="name"
+                            className="text-color3 font-medium ml-1"
+                          >
+                            User Address
+                          </label>
+                          <input
+                            type="text"
+                            name="userAddress"
+                            id="userAddress"
+                            placeholder="Enter organization name"
+                            className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
+                            value={userAddress}
+                            onChange={(e) => setUserAddress(e.target.value)}
                             required
                           />
                         </div>
@@ -684,7 +717,6 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                         <DialogFooter>
                           <Button
                             type="submit"
-                            onClick={handleRegister}
                             disabled={isWritingCampReg || isConfirmingCampReg}
                           >
                             Submit

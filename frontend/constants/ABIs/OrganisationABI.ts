@@ -17,7 +17,6 @@ export const OrganisationABI = [
   { inputs: [], name: "not_Autorized_Caller", type: "error" },
   { inputs: [], name: "not_valid_Staff", type: "error" },
   { inputs: [], name: "not_valid_user", type: "error" },
-  { inputs: [], name: "user_already_registered", type: "error" },
   {
     anonymous: false,
     inputs: [
@@ -94,10 +93,16 @@ export const OrganisationABI = [
     inputs: [
       { indexed: false, internalType: "string", name: "name", type: "string" },
       {
-        indexed: false,
+        indexed: true,
         internalType: "address",
         name: "user_address",
         type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "email_address",
+        type: "string",
       },
     ],
     name: "UserCampaignRegistered",
@@ -709,8 +714,16 @@ export const OrganisationABI = [
   },
   {
     inputs: [
-      { internalType: "string", name: "_name", type: "string" },
-      { internalType: "string", name: "_email", type: "string" },
+      {
+        components: [
+          { internalType: "string", name: "name", type: "string" },
+          { internalType: "address", name: "user_address", type: "address" },
+          { internalType: "string", name: "email_address", type: "string" },
+        ],
+        internalType: "struct organisation.Reg",
+        name: "_user",
+        type: "tuple",
+      },
     ],
     name: "userCampaignReg",
     outputs: [],

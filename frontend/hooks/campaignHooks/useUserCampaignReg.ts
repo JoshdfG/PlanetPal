@@ -7,9 +7,14 @@ import {
   type BaseError,
 } from "wagmi";
 
+interface Reg {
+  name: string;
+  user_address: `0x${string}`;
+  email_address: string;
+}
+
 const useUserCampaignReg = () => {
   const [isWritingCampReg, setIsWritingCampReg] = useState(false);
-
   const { data: hash, error, writeContract } = useWriteContract();
 
   const active_organisation = window.localStorage.getItem(
@@ -18,14 +23,14 @@ const useUserCampaignReg = () => {
   const contract_address = JSON.parse(active_organisation as `0x${string}`);
 
   const registerUser = useCallback(
-    async (name: string, email: string) => {
+    async (user: Reg) => {
       setIsWritingCampReg(true);
 
       writeContract({
         address: contract_address,
         abi: OrganisationABI,
         functionName: "userCampaignReg",
-        args: [name, email],
+        args: [user],
       });
     },
     [contract_address]

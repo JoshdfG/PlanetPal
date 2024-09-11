@@ -52,11 +52,6 @@ const Piechart = () => {
           statsData?.totalStudent,
           statsData?.totalMentors,
           statsData?.totalSignedAttendance,
-          statsData?.totalCertification
-            ? statsData.totalStudent
-            : statsData.totalCertification === undefined
-            ? 0
-            : 0,
         ],
       });
     }
@@ -65,7 +60,6 @@ const Piechart = () => {
     statsData?.totalStudent,
     statsData?.totalMentors,
     statsData?.totalSignedAttendance,
-    statsData?.totalCertification,
     isLoading,
   ]);
 

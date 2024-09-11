@@ -33,7 +33,7 @@ const useGetListOfUsers = () => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchStudentsDetails = useCallback(async () => {
-    if (!listOfStudents) return;
+    if (!listOfStudents || !Array.isArray(listOfStudents)) return;
 
     try {
       const formattedRes = listOfStudents.map((address: any) =>
@@ -53,7 +53,7 @@ const useGetListOfUsers = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [listOfStudents?.length]);
+  }, [listOfStudents]);
 
   useEffect(() => {
     fetchStudentsDetails();

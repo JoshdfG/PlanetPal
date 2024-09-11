@@ -25,8 +25,10 @@ const useGetCampaigns = () => {
   });
 
   useEffect(() => {
-    if (campaigns) {
+    if (Array.isArray(campaigns)) {
       setList(campaigns);
+    } else {
+      console.error("Invalid campaigns:", campaigns);
     }
   }, [campaigns]);
 

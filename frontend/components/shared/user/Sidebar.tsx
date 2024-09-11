@@ -13,7 +13,7 @@ import { MdAssignment, MdEventSeat } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { LuLogOut } from "react-icons/lu";
 import { useAccount } from "wagmi";
-import useGetStudentName from "@/hooks/studentHooks/useGetStudentName";
+import useGetStudentName from "@/hooks/userHooks/useGetStudentName";
 import { PiStudentFill } from "react-icons/pi";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { GiPlantsAndAnimals } from "react-icons/gi";

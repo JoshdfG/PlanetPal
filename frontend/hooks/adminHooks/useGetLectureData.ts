@@ -35,7 +35,7 @@ const useGetLectureData = () => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchLectureData = useCallback(async () => {
-    if (!listOfLectureIds) return;
+    if (!listOfLectureIds || !Array.isArray(listOfLectureIds)) return;
 
     try {
       const formattedRes = listOfLectureIds.map((id: any) => id.toString());
@@ -60,7 +60,7 @@ const useGetLectureData = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [listOfLectureIds?.length, listOfLectureIds, contract_address]);
+  }, [listOfLectureIds, contract_address]);
 
   useEffect(() => {
     fetchLectureData();

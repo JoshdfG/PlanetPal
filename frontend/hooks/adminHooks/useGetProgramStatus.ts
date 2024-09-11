@@ -31,7 +31,11 @@ const useGetProgramStatus = () => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchProgramStatus = useCallback(async () => {
-    setStatus(programStatus);
+    if (typeof programStatus === "boolean" || programStatus === undefined) {
+      setStatus(programStatus);
+    } else {
+      console.error("Invalid program status:", programStatus);
+    }
   }, [programStatus]);
 
   useEffect(() => {

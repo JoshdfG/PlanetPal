@@ -38,7 +38,7 @@ const useGetSignedAttendanceImages = (_studentAddress: any) => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchSignedAttendanceImages = useCallback(async () => {
-    if (!attendedLectureIds) return;
+    if (!attendedLectureIds || !Array.isArray(attendedLectureIds)) return;
 
     try {
       const formattedRes = attendedLectureIds.map((id: any) => id.toString());
@@ -63,7 +63,7 @@ const useGetSignedAttendanceImages = (_studentAddress: any) => {
     } catch (error) {
       console.error(error);
     }
-  }, [attendedLectureIds?.length, attendedLectureIds, contract_address]);
+  }, [attendedLectureIds, contract_address]);
 
   useEffect(() => {
     fetchSignedAttendanceImages();

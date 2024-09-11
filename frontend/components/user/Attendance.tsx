@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import ReactPaginate from "react-paginate";
-import useGetSignedAttendanceImages from "@/hooks/studentHooks/useGetSignedAttendanceImages";
+import useGetSignedAttendanceImages from "@/hooks/userHooks/useGetSignedAttendanceImages";
 import { useAccount } from "wagmi";
 
 const UserAttendenceNFT = () => {

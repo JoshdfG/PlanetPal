@@ -59,7 +59,7 @@ const AttendenceNFT = ({ apiKey, secretKey }: any) => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchLectureData = useCallback(async () => {
-    if (!listOfLectureIds) return;
+    if (!listOfLectureIds || !Array.isArray(listOfLectureIds)) return;
 
     try {
       const formattedRes = listOfLectureIds.map((id: any) => id.toString());

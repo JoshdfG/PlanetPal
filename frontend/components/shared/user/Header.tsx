@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import useVerifyStudent from "@/hooks/layoutProtectionHook/useVerifyStudent";
 import { toast } from "sonner";
-import useGetStudentName from "@/hooks/studentHooks/useGetStudentName";
+import useGetStudentName from "@/hooks/userHooks/useGetStudentName";
 import { PiStudentFill } from "react-icons/pi";
 import { SUPPORTED_CHAIN_ID } from "@/constants/chain";
 

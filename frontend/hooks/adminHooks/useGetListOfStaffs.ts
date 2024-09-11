@@ -33,7 +33,7 @@ const useGetListOfStaffs = () => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchMmentorsDetails = useCallback(async () => {
-    if (!listOfMentors) return;
+    if (!listOfMentors || !Array.isArray(listOfMentors)) return;
 
     try {
       const formattedRes = listOfMentors.map((address: any) =>
@@ -53,7 +53,7 @@ const useGetListOfStaffs = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [listOfMentors?.length]);
+  }, [listOfMentors]);
 
   useEffect(() => {
     fetchMmentorsDetails();

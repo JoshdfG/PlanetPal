@@ -31,7 +31,7 @@ const useGetUserOrganisations = (_userAddress: any) => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchUserOrganisations = useCallback(async () => {
-    if (!listOfOrganisations) return;
+    if (!listOfOrganisations || !Array.isArray(listOfOrganisations)) return;
 
     try {
       const formattedRes = listOfOrganisations.map((address: any) =>
@@ -66,7 +66,7 @@ const useGetUserOrganisations = (_userAddress: any) => {
     } catch (error) {
       console.error(error);
     }
-  }, [listOfOrganisations?.length]);
+  }, [listOfOrganisations]);
 
   useEffect(() => {
     fetchUserOrganisations();

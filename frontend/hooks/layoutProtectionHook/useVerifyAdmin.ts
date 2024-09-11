@@ -18,7 +18,7 @@ const useVerifyAdmin = (_userAddress: any) => {
   } = useReadContract({
     address: contract_address,
     abi: OrganisationABI,
-    functionName: "VerifyMentor",
+    functionName: "VerifyStaff",
     args: [_userAddress],
   });
 

@@ -10,7 +10,6 @@ interface StatsData {
   totalStudent: number;
   totalMentors: number;
   totalSignedAttendance: number;
-  totalCertification: boolean | undefined;
 }
 
 const useGetNumericStatistics = () => {
@@ -19,7 +18,6 @@ const useGetNumericStatistics = () => {
     totalStudent: 0,
     totalMentors: 0,
     totalSignedAttendance: 0,
-    totalCertification: false,
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,15 +60,15 @@ const useGetNumericStatistics = () => {
     const [lectureIds, listOfStudents, listOfMentors] = data;
 
     try {
-      const formattedLectureIds = lectureIds?.result?.map((id: any) =>
-        id.toString()
-      );
-      const formattedlistOfStudents = listOfStudents?.result?.map(
-        (address: any) => address.toString()
-      );
-      const formattedlistOfMentors = listOfMentors?.result?.map(
-        (address: any) => address.toString()
-      );
+      const formattedLectureIds = Array.isArray(lectureIds?.result)
+        ? lectureIds.result.map((id: any) => id.toString())
+        : [];
+      const formattedlistOfStudents = Array.isArray(listOfStudents?.result)
+        ? listOfStudents.result.map((address: any) => address.toString())
+        : [];
+      const formattedlistOfMentors = Array.isArray(listOfMentors?.result)
+        ? listOfMentors.result.map((address: any) => address.toString())
+        : [];
 
       // Mapping
       const totalClassesAttendedPromises =

@@ -2,9 +2,9 @@
 import { Calendar } from "@/components/ui/calendar";
 import { useMemo, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import useGetStudentName from "@/hooks/studentHooks/useGetStudentName";
-import useGetAttendanceRatio from "@/hooks/studentHooks/useGetAttendanceRatio";
-import useGetSignedAttendanceImages from "@/hooks/studentHooks/useGetSignedAttendanceImages";
+import useGetStudentName from "@/hooks/userHooks/useGetStudentName";
+import useGetAttendanceRatio from "@/hooks/userHooks/useGetAttendanceRatio";
+import useGetSignedAttendanceImages from "@/hooks/userHooks/useGetSignedAttendanceImages";
 import { useAccount } from "wagmi";
 import Link from "next/link";
 import { FaFileSignature } from "react-icons/fa6";

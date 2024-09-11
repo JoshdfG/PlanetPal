@@ -37,7 +37,7 @@ const useGetAttendanceRatio = (student_address: any) => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchAttendanceRatio = useCallback(() => {
-    if (attendanceRatioData) {
+    if (attendanceRatioData && Array.isArray(attendanceRatioData)) {
       const [attendance, totalClasses] = attendanceRatioData;
       setAttendanceRatio({
         attendance: Number(attendance),

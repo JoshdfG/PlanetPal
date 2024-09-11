@@ -3,10 +3,10 @@ import { ethereum, Address } from "@graphprotocol/graph-ts"
 import { OrganisationCreated } from "../generated/organisationFactory/organisationFactory"
 
 export function createOrganisationCreatedEvent(
-  Organisation: Address,
+  Organisation_address: Address,
   Nft: Address,
-  organisation: string,
-  uri: string,
+  organisation_name: string,
+  _org_uri: string,
   adminName: string
 ): OrganisationCreated {
   let organisationCreatedEvent = changetype<OrganisationCreated>(newMockEvent())
@@ -15,8 +15,8 @@ export function createOrganisationCreatedEvent(
 
   organisationCreatedEvent.parameters.push(
     new ethereum.EventParam(
-      "Organisation",
-      ethereum.Value.fromAddress(Organisation)
+      "Organisation_address",
+      ethereum.Value.fromAddress(Organisation_address)
     )
   )
   organisationCreatedEvent.parameters.push(
@@ -24,12 +24,12 @@ export function createOrganisationCreatedEvent(
   )
   organisationCreatedEvent.parameters.push(
     new ethereum.EventParam(
-      "organisation",
-      ethereum.Value.fromString(organisation)
+      "organisation_name",
+      ethereum.Value.fromString(organisation_name)
     )
   )
   organisationCreatedEvent.parameters.push(
-    new ethereum.EventParam("uri", ethereum.Value.fromString(uri))
+    new ethereum.EventParam("_org_uri", ethereum.Value.fromString(_org_uri))
   )
   organisationCreatedEvent.parameters.push(
     new ethereum.EventParam("adminName", ethereum.Value.fromString(adminName))

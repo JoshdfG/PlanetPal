@@ -1,9 +1,9 @@
 type OrganisationCreated @entity(immutable: true) {
   id: Bytes!
-  Organisation: Bytes! # address
+  Organisation_address: Bytes! # address
   Nft: Bytes! # address
-  organisation: String! # string
-  uri: String! # string
+  organisation_name: String! # string
+  _org_uri: String! # string
   adminName: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!

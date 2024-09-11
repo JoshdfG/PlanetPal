@@ -7,10 +7,10 @@ export function handleOrganisationCreated(
   let entity = new OrganisationCreated(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.Organisation = event.params.Organisation
+  entity.Organisation_address = event.params.Organisation_address
   entity.Nft = event.params.Nft
-  entity.organisation = event.params.organisation
-  entity.uri = event.params.uri
+  entity.organisation_name = event.params.organisation_name
+  entity._org_uri = event.params._org_uri
   entity.adminName = event.params.adminName
 
   entity.blockNumber = event.block.number

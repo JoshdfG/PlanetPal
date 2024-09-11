@@ -8,9 +8,9 @@ dataSources:
     name: organisationFactory
     network: base-sepolia
     source:
-      address: "0x3af5D50447be0235D656D6f107668cFB27646289"
+      address: "0x51B9000FE125c84487B26d3F6734f6e4164d463e"
       abi: organisationFactory
-      startBlock: 15138113
+      startBlock: 15139233
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

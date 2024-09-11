@@ -17,18 +17,18 @@ import { createOrganisationCreatedEvent } from "./organisation-factory-utils"
 
 describe("Describe entity assertions", () => {
   beforeAll(() => {
-    let Organisation = Address.fromString(
+    let Organisation_address = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
     let Nft = Address.fromString("0x0000000000000000000000000000000000000001")
-    let organisation = "Example string value"
-    let uri = "Example string value"
+    let organisation_name = "Example string value"
+    let _org_uri = "Example string value"
     let adminName = "Example string value"
     let newOrganisationCreatedEvent = createOrganisationCreatedEvent(
-      Organisation,
+      Organisation_address,
       Nft,
-      organisation,
-      uri,
+      organisation_name,
+      _org_uri,
       adminName
     )
     handleOrganisationCreated(newOrganisationCreatedEvent)
@@ -48,7 +48,7 @@ describe("Describe entity assertions", () => {
     assert.fieldEquals(
       "OrganisationCreated",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "Organisation",
+      "Organisation_address",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
@@ -60,13 +60,13 @@ describe("Describe entity assertions", () => {
     assert.fieldEquals(
       "OrganisationCreated",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "organisation",
+      "organisation_name",
       "Example string value"
     )
     assert.fieldEquals(
       "OrganisationCreated",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "uri",
+      "_org_uri",
       "Example string value"
     )
     assert.fieldEquals(

@@ -22,7 +22,7 @@ library Event {
     event AttendanceSigned(bytes signedId, address signer);
     event attendanceCreated(
         bytes indexed lectureId,
-        string indexed uri,
+        string indexed lecture_uri,
         string topic,
         address indexed staff
     );
@@ -31,19 +31,19 @@ library Event {
     event attendanceOpened(bytes openedId, address mentor);
 
     event OrganisationCreated(
-        address indexed Organisation,
+        address indexed Organisation_address,
         address indexed Nft,
-        string organisation,
-        string uri,
+        string organisation_name,
+        string _org_uri,
         string adminName
     );
 
     // Event for register()
-    event Registered(
-        address indexed organisation,
-        address[] students,
-        uint totalUsers
-    );
+    // event Registered(
+    //     address indexed organisation_add,
+    //     address[] students,
+    //     uint totalUsers
+    // );
     event UserCampaignRegistered(
         string name,
         address indexed user_address,

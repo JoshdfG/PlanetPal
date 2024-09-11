@@ -214,4 +214,25 @@ contract EcosystemTest is Test {
         ICHILD(child).getCampaignAttendance("B0202");
         vm.stopPrank();
     }
+
+    function testUserCampaignReg() public {
+        testOrganizationCreation();
+        vm.startPrank(userAdd);
+
+        console.log("Calling userCampaignReg...");
+
+        ICHILD.Reg memory testUser = ICHILD.Reg({
+            name: "TEST",
+            user_address: userAdd,
+            email_address: "email@example.com"
+        });
+
+        address child = _organisationFactory.getUserOrganisatons(director)[0];
+
+        ICHILD(child).userCampaignReg(testUser);
+
+        console.log("userCampaignReg called successfully.");
+
+        vm.stopPrank();
+    }
 }

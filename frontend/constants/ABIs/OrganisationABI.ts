@@ -20,7 +20,12 @@ export const OrganisationABI = [
   {
     anonymous: false,
     inputs: [
-      { indexed: false, internalType: "bytes", name: "Id", type: "bytes" },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "signedId",
+        type: "bytes",
+      },
       {
         indexed: false,
         internalType: "address",
@@ -150,7 +155,12 @@ export const OrganisationABI = [
   {
     anonymous: false,
     inputs: [
-      { indexed: false, internalType: "bytes", name: "Id", type: "bytes" },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "closedId",
+        type: "bytes",
+      },
       {
         indexed: false,
         internalType: "address",
@@ -170,7 +180,12 @@ export const OrganisationABI = [
         name: "lectureId",
         type: "bytes",
       },
-      { indexed: true, internalType: "string", name: "uri", type: "string" },
+      {
+        indexed: true,
+        internalType: "string",
+        name: "lecture_uri",
+        type: "string",
+      },
       { indexed: false, internalType: "string", name: "topic", type: "string" },
       {
         indexed: true,
@@ -185,7 +200,12 @@ export const OrganisationABI = [
   {
     anonymous: false,
     inputs: [
-      { indexed: false, internalType: "bytes", name: "Id", type: "bytes" },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "openedId",
+        type: "bytes",
+      },
       {
         indexed: false,
         internalType: "address",
@@ -225,7 +245,12 @@ export const OrganisationABI = [
   {
     anonymous: false,
     inputs: [
-      { indexed: false, internalType: "bytes", name: "Id", type: "bytes" },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "editedId",
+        type: "bytes",
+      },
       {
         indexed: false,
         internalType: "string",

@@ -1,17 +1,24 @@
-import useGetRegisteredUsers from "@/hooks/campaignHooks/useGetRegisteredUsers";
+import useGetUserCampaignReg from "@/hooks/campaignHooks/useGetRegisteredUsers";
 
 const WaitList = () => {
-  const { list: registeredUsers } = useGetRegisteredUsers();
+  const { users, isError, isLoading } = useGetUserCampaignReg();
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
   return (
     <div>
-      <h1>Registered Users</h1>
+      <h2>Registered Users</h2>
       <ul>
-        {registeredUsers.map((user, index) => (
+        {users.map((user, index) => (
           <li key={index}>
             <p>Name: {user.name}</p>
-            <p>User Address: {user.user_address}</p>
-            <p>Email Address: {user.email_address}</p>
+            <p>Address: {user.user_address}</p>
+            <p>Email: {user.email_address}</p>
           </li>
         ))}
       </ul>

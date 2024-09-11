@@ -26,8 +26,11 @@ import useCreateCampaign from "@/hooks/campaignHooks/useCreateCampaign";
 import useGetCampaigns from "@/hooks/campaignHooks/useGetCampaigns";
 import useUserCampaignReg from "@/hooks/campaignHooks/useUserCampaignReg";
 import { GrNew } from "react-icons/gr";
+import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
 
 const StartProgramme = ({ apiKey, secretKey }: any) => {
+  const getOrg = createNewOrganization();
+
   const router = useRouter();
   const { isConnected } = useAccount();
 

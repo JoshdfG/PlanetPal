@@ -1,8 +1,7 @@
 "use client";
 import { OrganisationABI } from "@/constants/ABIs/OrganisationABI";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { useReadContract } from "wagmi";
+import { useCallback, useEffect, useState } from "react";
+import { useReadContract, type BaseError } from "wagmi";
 
 interface Reg {
   name: string;
@@ -10,49 +9,44 @@ interface Reg {
   email_address: string;
 }
 
-const useGetRegisteredUsers = () => {
-  const [list, setList] = useState<Reg[]>([]);
-  const [isLoadingState, setIsLoading] = useState(true);
+const useGetUserCampaignReg = () => {
+  const [users, setUsers] = useState<Reg[]>([]);
+  const [isError, setIsError] = useState(false);
 
-  const active_organisation = window.localStorage?.getItem(
+  const active_organisation = window.localStorage.getItem(
     "active_organisation"
   );
-  const contract_address = active_organisation
-    ? JSON.parse(active_organisation)
-    : null;
+  const contract_address = JSON.parse(active_organisation as `0x${string}`);
 
-  if (!contract_address) {
-    console.error("No active organisation found.");
-    return { list, isLoading: false, error: "No active organisation found." };
-  }
-
-  const {
-    data: usersData,
-    error,
-    isLoading,
-  } = useReadContract({
+  const { data, error, isLoading } = useReadContract({
     address: contract_address,
     abi: OrganisationABI,
     functionName: "getUserCampaignReg",
   });
 
-  useEffect(() => {
-    if (Array.isArray(usersData)) {
-      setList(usersData as Reg[]);
-    } else {
-      console.error("Invalid users data:", usersData);
-    }
-    setIsLoading(false);
-  }, [usersData]);
+  const toastId = "getUserCampaignReg";
 
   useEffect(() => {
+    if (isLoading) {
+    }
+
+    if (data && Array.isArray(data)) {
+      setUsers(data as Reg[]);
+    } else if (data) {
+      console.error("Data is not an array:", data);
+    }
+
     if (error) {
-      toast.error(error.message, { position: "top-right" });
-      setIsLoading(false);
+      setIsError(true);
+      console.error(error);
     }
-  }, [error]);
+  }, [data, error, isLoading]);
 
-  return { list, isLoading: isLoadingState, error };
+  return {
+    users,
+    isError,
+    isLoading,
+  };
 };
 
-export default useGetRegisteredUsers;
+export default useGetUserCampaignReg;

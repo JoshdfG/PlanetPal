@@ -24,3 +24,91 @@ dataSources:
         - event: OrganisationCreated(indexed address,indexed address,string,string,string)
           handler: handleOrganisationCreated
       file: ./src/organisation-factory.ts
+  - kind: ethereum
+    name: organisation
+    network: base-sepolia
+    source:
+      address: "0xE3f5996919f78891C8E5ACfC47aC0917b16cC1B3"
+      abi: organisation
+      startBlock: 15139233
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AttendanceSigned
+        - CampaignCreated
+        - CampaignStopped
+        - Handover
+        - UserCampaignRegistered
+        - UserRegistered
+        - adminRemoved
+        - adminsRegistered
+        - attendanceClosed
+        - attendanceCreated
+        - attendanceOpened
+        - staffRemoved
+        - staffsRegistered
+        - topicEditted
+      abis:
+        - name: organisation
+          file: ./abis/organisation.json
+      eventHandlers:
+        - event: AttendanceSigned(bytes,address)
+          handler: handleAttendanceSigned
+        - event: CampaignCreated(string,address,uint256)
+          handler: handleCampaignCreated
+        - event: CampaignStopped(uint256)
+          handler: handleCampaignStopped
+        - event: Handover(address,address)
+          handler: handleHandover
+        - event: UserCampaignRegistered(string,indexed address,string)
+          handler: handleUserCampaignRegistered
+        - event: UserRegistered(uint256)
+          handler: handleUserRegistered
+        - event: adminRemoved(uint256)
+          handler: handleadminRemoved
+        - event: adminsRegistered(uint256)
+          handler: handleadminsRegistered
+        - event: attendanceClosed(bytes,address)
+          handler: handleattendanceClosed
+        - event: attendanceCreated(indexed bytes,indexed string,string,indexed address)
+          handler: handleattendanceCreated
+        - event: attendanceOpened(bytes,address)
+          handler: handleattendanceOpened
+        - event: staffRemoved(uint256)
+          handler: handlestaffRemoved
+        - event: staffsRegistered(uint256)
+          handler: handlestaffsRegistered
+        - event: topicEditted(bytes,string,string)
+          handler: handletopicEditted
+      file: ./src/organisation.ts
+  - kind: ethereum
+    name: RewardNFT
+    network: base-sepolia
+    source:
+      address: "0x49B4a9f1AA88dc9F4bbD9D0ce338e34Bf35896d4"
+      abi: RewardNFT
+      startBlock: 15139233
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalForAll
+        - TransferBatch
+        - TransferSingle
+        - URI
+      abis:
+        - name: RewardNFT
+          file: ./abis/RewardNFT.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/reward-nft.ts

@@ -3,6 +3,12 @@
     "organisationFactory": {
       "address": "0x51B9000FE125c84487B26d3F6734f6e4164d463e",
       "startBlock": 15139233
+    },
+    "organisation": {
+      "address": "0xE3f5996919f78891C8E5ACfC47aC0917b16cC1B3"
+    },
+    "RewardNFT": {
+      "address": "0x49B4a9f1AA88dc9F4bbD9D0ce338e34Bf35896d4"
     }
   }
 }

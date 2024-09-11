@@ -15,6 +15,7 @@ interface Reg {
 
 const useUserCampaignReg = () => {
   const [isWritingCampReg, setIsWritingCampReg] = useState(false);
+  const [registeredUser, setRegisteredUser] = useState<Reg | null>(null); // Store registered user data
   const { data: hash, error, writeContract } = useWriteContract();
 
   const active_organisation = window.localStorage.getItem(
@@ -32,8 +33,11 @@ const useUserCampaignReg = () => {
         functionName: "userCampaignReg",
         args: [user],
       });
+
+      // Store the input data in state
+      setRegisteredUser(user);
     },
-    [contract_address]
+    [contract_address, writeContract]
   );
 
   const { isLoading: isConfirmingCampReg, isSuccess: isConfirmed } =
@@ -72,6 +76,7 @@ const useUserCampaignReg = () => {
     registerUser,
     isWritingCampReg,
     isConfirmingCampReg,
+    registeredUser, // Return the registered user data
   };
 };
 

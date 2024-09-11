@@ -1,13 +1,16 @@
-import { OrganisationABI } from "@/constants/ABIs/OrganisationABI";
-import { getOrgContract } from "@/constants/contracts";
-import { readOnlyProvider } from "@/constants/provider";
-import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+"use client";
+import { useBlockNumber, useReadContract } from "wagmi";
 import { toast } from "sonner";
-import { useReadContract } from "wagmi";
+import { useEffect, useState, useCallback } from "react";
+import { OrganisationABI } from "@/constants/ABIs/OrganisationABI";
+import { useQueryClient } from "@tanstack/react-query";
 
 const useGetCampaigns = () => {
   const [list, setList] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const queryClient = useQueryClient();
+  const { data: blockNumber } = useBlockNumber({ watch: true });
 
   const active_organisation = window.localStorage?.getItem(
     "active_organisation"
@@ -16,8 +19,9 @@ const useGetCampaigns = () => {
 
   const {
     data: campaigns,
-    error,
-    isLoading,
+    error: campaignsError,
+    isPending: campaignsIsPending,
+    queryKey,
   } = useReadContract({
     address: contract_address,
     abi: OrganisationABI,
@@ -25,22 +29,31 @@ const useGetCampaigns = () => {
   });
 
   useEffect(() => {
-    if (Array.isArray(campaigns)) {
+    queryClient.invalidateQueries({ queryKey });
+  }, [blockNumber, queryClient, queryKey]);
+
+  const fetchCampaigns = useCallback(async () => {
+    if (!campaigns || !Array.isArray(campaigns)) return;
+
+    try {
       setList(campaigns);
-    } else {
-      console.error("Invalid campaigns:", campaigns);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
     }
   }, [campaigns]);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error.message, {
-        position: "top-right",
-      });
-    }
-  }, [error]);
+    fetchCampaigns();
+  }, [fetchCampaigns]);
 
-  return list;
+  useEffect(() => {
+    if (campaignsError) {
+      toast.error(campaignsError.message, { position: "top-right" });
+    }
+  }, [campaignsError]);
+
+  return { list, isLoading };
 };
 
 export default useGetCampaigns;

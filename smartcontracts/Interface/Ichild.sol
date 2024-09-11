@@ -9,6 +9,8 @@ interface ICHILD {
         string email_address;
     }
 
+    function getUserCampaignReg() external view returns (Reg[] memory);
+
     function userCampaignReg(Reg calldata _user) external;
 
     function createAttendance(

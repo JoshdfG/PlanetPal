@@ -414,9 +414,9 @@ const AttendenceNFT = ({ apiKey, secretKey }: any) => {
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
-                          <DialogTitle>Classmate+ Attendence</DialogTitle>
+                          <DialogTitle>Campaign Attendence</DialogTitle>
                           <DialogDescription>
-                            Attendence Detail
+                            Campaign NFT Detail
                           </DialogDescription>
                         </DialogHeader>
                         <main className="w-full flex md:flex-row flex-col gap-4 mb-3 overflow-y-auto">
@@ -473,7 +473,7 @@ const AttendenceNFT = ({ apiKey, secretKey }: any) => {
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
-                          <DialogTitle>Classmate+</DialogTitle>
+                          <DialogTitle>PlanetPal</DialogTitle>
                           <DialogDescription>Update Topic</DialogDescription>
                         </DialogHeader>
                         <div className="w-full grid gap-4">

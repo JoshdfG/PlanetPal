@@ -235,4 +235,12 @@ contract EcosystemTest is Test {
 
         vm.stopPrank();
     }
+
+    function testGetUserCampaigns() public {
+        testUserCampaignReg();
+        vm.startPrank(director);
+        address child = _organisationFactory.getUserOrganisatons(director)[0];
+        ICHILD(child).getUserCampaignReg();
+        vm.stopPrank();
+    }
 }

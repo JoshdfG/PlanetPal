@@ -21,7 +21,7 @@ import Image from "next/image";
 import { SlPicture } from "react-icons/sl";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
-import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
+// import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
 
 const Programmes = ({ apiKey, secretKey }: any) => {
   const { isConnected, address } = useAccount();
@@ -123,7 +123,7 @@ const Programmes = ({ apiKey, secretKey }: any) => {
   const { list: listOfOrganisations, isLoading } =
     useGetUserOrganisations(address);
 
-  const getOrg = createNewOrganization();
+  // const getOrg = createNewOrganization();
 
   // route handling
   const handleRouting = (
@@ -330,12 +330,7 @@ const Programmes = ({ apiKey, secretKey }: any) => {
             <h3 className="text-xl text-color1 font-medium">
               {organisation.name}
             </h3>
-            <div className="w-[15%] h-1.5 rounded-lg bg-color1"></div>
-            {/* 
-            <h5 className="text-color3 text-sm capitalize">
-              {organisation.cohort}
-            </h5> */}
-
+            <div className="w-[15%] h-1.5 rounded-lg bg-color1"></div>\
             <div className="flex justify-between items-end w-full mt-4">
               <div className="flex flex-col">
                 <small className="text-color3 text-xs">Role</small>
@@ -347,7 +342,6 @@ const Programmes = ({ apiKey, secretKey }: any) => {
                 )}
               </div>
             </div>
-
             <div className="absolute top-6 right-6 flex flex-col items-center">
               <small className="text-color3 text-xs">Status</small>
               <h4

@@ -45,10 +45,10 @@ const UserAttendenceNFT = () => {
       <main className="w-full flex flex-col gap-7">
         <div className="flex flex-col ">
           <h1 className="uppercase text-color2 md:text-2xl font-bold text-xl">
-            Attendence
+            NFTS
           </h1>
           <h4 className="text-lg tracking-wider text-color2">
-            All Attendence NFTs
+            All Campaign NFTs
           </h4>
         </div>
         {isLoading ? (
@@ -92,7 +92,7 @@ const UserAttendenceNFT = () => {
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
-                        <DialogTitle>Classmate+ Attendence</DialogTitle>
+                        <DialogTitle>PlanetPal Attendence</DialogTitle>
                         <DialogDescription>Attendence Detail</DialogDescription>
                       </DialogHeader>
                       <main className="w-full flex md:flex-row flex-col gap-4 mb-3 overflow-y-auto">

@@ -26,11 +26,8 @@ import useCreateCampaign from "@/hooks/campaignHooks/useCreateCampaign";
 import useGetCampaigns from "@/hooks/campaignHooks/useGetCampaigns";
 import useUserCampaignReg from "@/hooks/campaignHooks/useUserCampaignReg";
 import { GrNew } from "react-icons/gr";
-import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
 
 const StartProgramme = ({ apiKey, secretKey }: any) => {
-  const getOrg = createNewOrganization();
-
   const router = useRouter();
   const { isConnected } = useAccount();
 
@@ -229,8 +226,8 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
     await registerUser(user);
   };
 
-  const campaigns = useGetCampaigns();
-  console.log(campaigns);
+  const { list, isLoading } = useGetCampaigns();
+  console.log(list);
 
   return (
     <section className="w-full flex flex-col gap-10">
@@ -596,144 +593,158 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
         {/* display campaigns */}
         <section>
           <div>
-            <h1>Here you'll find ongoing campaigns</h1>
+            <h1 className="font-semibold">
+              Here you'll find ongoing campaigns
+            </h1>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4 mx-2">
-            {campaigns.map((campaign, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md p-4">
-                <img
-                  src={campaign.campaign_uri}
-                  alt={campaign.campaign_name}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
-                <h1 className="text-lg font-bold mb-2">
-                  {campaign.campaign_name}
-                </h1>
-                <div className="text-gray-600">
-                  <p>
-                    <span className="font-bold">Location:</span>{" "}
-                    {campaign.campaign_location}
-                  </p>
-                  <p>
-                    <span className="font-bold">Description:</span>{" "}
-                    {campaign.campaign_description}
-                  </p>
-                  {/* <p>
-                    <span className="font-bold">Owner:</span> {campaign.owner}
-                  </p> */}
-                  <p className="text-red-300 my-2 text-xs font-bold">
-                    Register to be added to the organisation
-                  </p>{" "}
-                  <Dialog>
-                    {isConnected ? (
-                      <DialogTrigger asChild>
+          {isLoading ? (
+            <div className="w-full h-[250px] flex justify-center items-center font-bold text-3xl">
+              Loading...
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4 mx-2">
+              {list.map((campaign, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-md p-4">
+                  <img
+                    src={campaign.campaign_uri}
+                    alt={campaign.campaign_name}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <h1 className="text-lg font-bold mb-2">
+                    {campaign.campaign_name}
+                  </h1>
+                  <div className="text-gray-600">
+                    <p>
+                      <span className="font-bold">Location:</span>{" "}
+                      {campaign.campaign_location}
+                    </p>
+                    <p>
+                      <span className="font-bold">Description:</span>{" "}
+                      {campaign.campaign_description}
+                    </p>
+                    <p className="text-red-300 my-2 text-xs font-bold">
+                      Register to be added to the organisation
+                    </p>{" "}
+                    <Dialog>
+                      {" "}
+                      <Button
+                        className="my-2 w-full"
+                        type="submit"
+                        onClick={() => {
+                          router.push("/waitlist");
+                        }}
+                      >
+                        View WaitList
+                      </Button>
+                      {isConnected ? (
+                        <DialogTrigger asChild>
+                          <Button
+                            type="button"
+                            className="text-white bg-color1 hover:bg-color1/65 flex items-center gap-1 w-full"
+                          >
+                            Register
+                            <IoIosAddCircleOutline className="text-xl" />
+                          </Button>
+                        </DialogTrigger>
+                      ) : (
                         <Button
+                          onClick={() =>
+                            toast.error("Please connect wallet", {
+                              position: "top-right",
+                            })
+                          }
                           type="button"
-                          className="text-white bg-color1 hover:bg-color1/65 flex items-center gap-1 w-full"
+                          className="text-white bg-color1 hover:bg-color1/50 flex items-center gap-1"
                         >
                           Register
                           <IoIosAddCircleOutline className="text-xl" />
                         </Button>
-                      </DialogTrigger>
-                    ) : (
-                      <Button
-                        onClick={() =>
-                          toast.error("Please connect wallet", {
-                            position: "top-right",
-                          })
-                        }
-                        type="button"
-                        className="text-white bg-color1 hover:bg-color1/50 flex items-center gap-1"
-                      >
-                        Register
-                        <IoIosAddCircleOutline className="text-xl" />
-                      </Button>
-                    )}
-
-                    <DialogContent className="sm:max-w-[425px]">
-                      <DialogHeader>
-                        <DialogTitle className="mx-auto">Sign Up</DialogTitle>
-                        <DialogDescription className="mx-auto">
-                          Sign up to be added to the organisation
-                        </DialogDescription>
-                      </DialogHeader>
-                      <form
-                        className="w-full grid gap-4"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          handleRegister();
-                        }}
-                      >
-                        <div className="w-full flex flex-col items-center"></div>
-                        <div className="flex flex-col">
-                          <label
-                            htmlFor="name"
-                            className="text-color3 font-medium ml-1"
-                          >
-                            UserName
-                          </label>
-                          <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Enter organization name"
-                            className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <label
-                            htmlFor="name"
-                            className="text-color3 font-medium ml-1"
-                          >
-                            User Address
-                          </label>
-                          <input
-                            type="text"
-                            name="userAddress"
-                            id="userAddress"
-                            placeholder="Enter organization name"
-                            className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
-                            value={userAddress}
-                            onChange={(e) => setUserAddress(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <label
-                            htmlFor="email"
-                            className="text-color3 font-medium ml-1"
-                          >
-                            E-mail{" "}
-                          </label>
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            placeholder="Enter email"
-                            className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                          />
-                        </div>{" "}
-                        <DialogFooter>
-                          <Button
-                            type="submit"
-                            disabled={isWritingCampReg || isConfirmingCampReg}
-                          >
-                            Submit
-                          </Button>
-                        </DialogFooter>
-                      </form>
-                    </DialogContent>
-                  </Dialog>
+                      )}
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle className="mx-auto">Sign Up</DialogTitle>
+                          <DialogDescription className="mx-auto">
+                            Sign up to be added to the organisation
+                          </DialogDescription>
+                        </DialogHeader>
+                        <form
+                          className="w-full grid gap-4"
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            handleRegister();
+                          }}
+                        >
+                          <div className="w-full flex flex-col items-center"></div>
+                          <div className="flex flex-col">
+                            <label
+                              htmlFor="name"
+                              className="text-color3 font-medium ml-1"
+                            >
+                              UserName
+                            </label>
+                            <input
+                              type="text"
+                              name="name"
+                              id="name"
+                              placeholder="Enter organization name"
+                              className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label
+                              htmlFor="name"
+                              className="text-color3 font-medium ml-1"
+                            >
+                              User Address
+                            </label>
+                            <input
+                              type="text"
+                              name="userAddress"
+                              id="userAddress"
+                              placeholder="Enter organization name"
+                              className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
+                              value={userAddress}
+                              onChange={(e) => setUserAddress(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <label
+                              htmlFor="email"
+                              className="text-color3 font-medium ml-1"
+                            >
+                              E-mail{" "}
+                            </label>
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              placeholder="Enter email"
+                              className="w-full caret-color1 py-3 px-4 outline-none rounded-lg border border-color1 text-sm bg-color1/5 text-color3"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              required
+                            />
+                          </div>{" "}
+                          <DialogFooter>
+                            <Button
+                              type="submit"
+                              disabled={isWritingCampReg || isConfirmingCampReg}
+                            >
+                              Submit
+                            </Button>
+                          </DialogFooter>
+                        </form>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
       </section>
     </section>

@@ -38,7 +38,7 @@ const useGetAllStats = () => {
     try {
       const totalListOfStudents = allOrganisation.map(async (address: any) => {
         const contract = getOrgContract(readOnlyProvider, address);
-        const list = await contract.liststudents();
+        const list = await contract.listUsers();
         return list.length;
       });
       const totalListOfStudentResults = await Promise.all(totalListOfStudents);
@@ -49,7 +49,7 @@ const useGetAllStats = () => {
 
       const totalListOfMentors = allOrganisation.map(async (address: any) => {
         const contract = getOrgContract(readOnlyProvider, address);
-        const list = await contract.listMentors();
+        const list = await contract.listStaffs();
         return list.length;
       });
       const totalListOfMentorResults = await Promise.all(totalListOfMentors);
@@ -60,7 +60,7 @@ const useGetAllStats = () => {
 
       const totalListOfClasses = allOrganisation.map(async (address: any) => {
         const contract = getOrgContract(readOnlyProvider, address);
-        const list = await contract.getLectureIds();
+        const list = await contract.getCampaignIds();
         return list.length;
       });
       const totalListOfClassResults = await Promise.all(totalListOfClasses);
@@ -72,11 +72,11 @@ const useGetAllStats = () => {
       const totalListOfAttendances = allOrganisation.map(
         async (address: any) => {
           const contract = getOrgContract(readOnlyProvider, address);
-          const list = await contract.liststudents();
+          const list = await contract.listUsers();
           const formattedList = list.map((address: any) => address.toString());
 
           const totalAttendances = formattedList.map(async (addr: any) => {
-            const attendedClasses = await contract.listClassesAttended(addr);
+            const attendedClasses = await contract.listCampaignAttended(addr);
             return attendedClasses.length;
           });
           const attendances = await Promise.all(totalAttendances);

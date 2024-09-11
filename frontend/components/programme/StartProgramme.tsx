@@ -25,8 +25,12 @@ import { FiEdit } from "react-icons/fi";
 import useCreateCampaign from "@/hooks/campaignHooks/useCreateCampaign";
 import useGetCampaigns from "@/hooks/campaignHooks/useGetCampaigns";
 import useUserCampaignReg from "@/hooks/campaignHooks/useUserCampaignReg";
+import { GrNew } from "react-icons/gr";
+import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
 
 const StartProgramme = ({ apiKey, secretKey }: any) => {
+  const getOrg = createNewOrganization();
+
   const router = useRouter();
   const { isConnected } = useAccount();
 
@@ -416,8 +420,7 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                   type="button"
                   className="text-white bg-color1 hover:bg-color1/65 flex items-center gap-1"
                 >
-                  Create new Campaign{" "}
-                  <IoIosAddCircleOutline className="text-xl" />
+                  Create new Campaign <GrNew className="text-xl" />
                 </Button>
               </DialogTrigger>
             ) : (
@@ -430,8 +433,7 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                 type="button"
                 className="text-white bg-color1 hover:bg-color1/50 flex items-center gap-1"
               >
-                Create new Campaign{" "}
-                <IoIosAddCircleOutline className="text-xl" />
+                Create new Campaign <GrNew className="text-xl" />
               </Button>
             )}
 
@@ -570,7 +572,10 @@ const StartProgramme = ({ apiKey, secretKey }: any) => {
                   />
                 </div>
                 <DialogFooter>
-                  <Button type="submit" disabled={isWriting || isConfirming}>
+                  <Button
+                    type="submit"
+                    disabled={isWritingCampaign || isConfirmingCampaign}
+                  >
                     Submit
                   </Button>
                 </DialogFooter>

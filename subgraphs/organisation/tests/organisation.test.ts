@@ -17,11 +17,11 @@ import { createAttendanceSignedEvent } from "./organisation-utils"
 
 describe("Describe entity assertions", () => {
   beforeAll(() => {
-    let Id = Bytes.fromI32(1234567890)
+    let signedId = Bytes.fromI32(1234567890)
     let signer = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let newAttendanceSignedEvent = createAttendanceSignedEvent(Id, signer)
+    let newAttendanceSignedEvent = createAttendanceSignedEvent(signedId, signer)
     handleAttendanceSigned(newAttendanceSignedEvent)
   })
 
@@ -39,7 +39,7 @@ describe("Describe entity assertions", () => {
     assert.fieldEquals(
       "AttendanceSigned",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "Id",
+      "signedId",
       "1234567890"
     )
     assert.fieldEquals(

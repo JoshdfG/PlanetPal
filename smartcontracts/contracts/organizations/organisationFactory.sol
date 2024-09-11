@@ -23,13 +23,13 @@ contract organisationFactory {
     }
 
     function createorganisation(
-        string memory _organisation,
+        string memory _organisation_name,
         string memory _uri,
         string memory _adminName
     ) external returns (address Organisation, address Nft) {
         organisationAdmin = msg.sender;
         organisation OrganisationAddress = new organisation(
-            _organisation,
+            _organisation_name,
             organisationAdmin,
             _adminName,
             _uri
@@ -37,7 +37,7 @@ contract organisationFactory {
         Organisations.push(address(OrganisationAddress));
         validOrganisation[address(OrganisationAddress)] = true;
         address AttendanceAddr = IREWARDFactory(rewardFactory).completePackage(
-            _organisation,
+            _organisation_name,
             _adminName,
             _uri,
             address(OrganisationAddress)
@@ -53,7 +53,7 @@ contract organisationFactory {
         emit Event.OrganisationCreated(
             address(OrganisationAddress),
             address(AttendanceAddr),
-            _organisation,
+            _organisation_name,
             _uri,
             _adminName
         );

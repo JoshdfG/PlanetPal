@@ -68,7 +68,6 @@ const useCreateCampaign = (
         id: toastId,
         position: "top-right",
       });
-      router.push("/viewprogramme");
       setIsWriting(false);
     }
 

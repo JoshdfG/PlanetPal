@@ -27,7 +27,7 @@
       {
         "indexed": false,
         "internalType": "bytes",
-        "name": "Id",
+        "name": "signedId",
         "type": "bytes"
       },
       {
@@ -167,7 +167,7 @@
       {
         "indexed": false,
         "internalType": "bytes",
-        "name": "Id",
+        "name": "closedId",
         "type": "bytes"
       },
       {
@@ -192,7 +192,7 @@
       {
         "indexed": true,
         "internalType": "string",
-        "name": "uri",
+        "name": "lecture_uri",
         "type": "string"
       },
       {
@@ -217,7 +217,7 @@
       {
         "indexed": false,
         "internalType": "bytes",
-        "name": "Id",
+        "name": "openedId",
         "type": "bytes"
       },
       {
@@ -262,7 +262,7 @@
       {
         "indexed": false,
         "internalType": "bytes",
-        "name": "Id",
+        "name": "editedId",
         "type": "bytes"
       },
       {

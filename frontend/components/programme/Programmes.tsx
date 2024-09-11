@@ -21,6 +21,7 @@ import Image from "next/image";
 import { SlPicture } from "react-icons/sl";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
+import { createNewOrganization } from "@/hooks/readFuntions/allReadFunctions";
 
 const Programmes = ({ apiKey, secretKey }: any) => {
   const { isConnected, address } = useAccount();
@@ -121,6 +122,8 @@ const Programmes = ({ apiKey, secretKey }: any) => {
   // getting list of organisations
   const { list: listOfOrganisations, isLoading } =
     useGetUserOrganisations(address);
+
+  const getOrg = createNewOrganization();
 
   // route handling
   const handleRouting = (

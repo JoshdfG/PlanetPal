@@ -1,6 +1,17 @@
+type OrganisationCreated @entity(immutable: true) {
+  id: Bytes!
+  Organisation_address: Bytes! # address
+  Nft: Bytes! # address
+  organisation_name: String! # string
+  _org_uri: String! # string
+  adminName: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
 type AttendanceSigned @entity(immutable: true) {
   id: Bytes!
-  Id: Bytes! # bytes
+  signedId: Bytes! # bytes
   signer: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -70,7 +81,7 @@ type adminsRegistered @entity(immutable: true) {
 
 type attendanceClosed @entity(immutable: true) {
   id: Bytes!
-  Id: Bytes! # bytes
+  closedId: Bytes! # bytes
   mentor: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -80,7 +91,7 @@ type attendanceClosed @entity(immutable: true) {
 type attendanceCreated @entity(immutable: true) {
   id: Bytes!
   lectureId: Bytes! # bytes
-  uri: String! # string
+  lecture_uri: String! # string
   topic: String! # string
   staff: Bytes! # address
   blockNumber: BigInt!
@@ -90,7 +101,7 @@ type attendanceCreated @entity(immutable: true) {
 
 type attendanceOpened @entity(immutable: true) {
   id: Bytes!
-  Id: Bytes! # bytes
+  openedId: Bytes! # bytes
   mentor: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
@@ -115,9 +126,51 @@ type staffsRegistered @entity(immutable: true) {
 
 type topicEditted @entity(immutable: true) {
   id: Bytes!
-  Id: Bytes! # bytes
+  editedId: Bytes! # bytes
   oldTopic: String! # string
   newTopic: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type ApprovalForAll @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferBatch @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  ids: [BigInt!]! # uint256[]
+  values: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferSingle @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  RewardNFT_id: BigInt! # uint256
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type URI @entity(immutable: true) {
+  id: Bytes!
+  value: String! # string
+  RewardNFT_id: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

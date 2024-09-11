@@ -18,7 +18,7 @@ import {
 } from "../generated/organisation/organisation"
 
 export function createAttendanceSignedEvent(
-  Id: Bytes,
+  signedId: Bytes,
   signer: Address
 ): AttendanceSigned {
   let attendanceSignedEvent = changetype<AttendanceSigned>(newMockEvent())
@@ -26,7 +26,7 @@ export function createAttendanceSignedEvent(
   attendanceSignedEvent.parameters = new Array()
 
   attendanceSignedEvent.parameters.push(
-    new ethereum.EventParam("Id", ethereum.Value.fromBytes(Id))
+    new ethereum.EventParam("signedId", ethereum.Value.fromBytes(signedId))
   )
   attendanceSignedEvent.parameters.push(
     new ethereum.EventParam("signer", ethereum.Value.fromAddress(signer))
@@ -177,7 +177,7 @@ export function createadminsRegisteredEvent(
 }
 
 export function createattendanceClosedEvent(
-  Id: Bytes,
+  closedId: Bytes,
   mentor: Address
 ): attendanceClosed {
   let attendanceClosedEvent = changetype<attendanceClosed>(newMockEvent())
@@ -185,7 +185,7 @@ export function createattendanceClosedEvent(
   attendanceClosedEvent.parameters = new Array()
 
   attendanceClosedEvent.parameters.push(
-    new ethereum.EventParam("Id", ethereum.Value.fromBytes(Id))
+    new ethereum.EventParam("closedId", ethereum.Value.fromBytes(closedId))
   )
   attendanceClosedEvent.parameters.push(
     new ethereum.EventParam("mentor", ethereum.Value.fromAddress(mentor))
@@ -196,7 +196,7 @@ export function createattendanceClosedEvent(
 
 export function createattendanceCreatedEvent(
   lectureId: Bytes,
-  uri: string,
+  lecture_uri: string,
   topic: string,
   staff: Address
 ): attendanceCreated {
@@ -208,7 +208,10 @@ export function createattendanceCreatedEvent(
     new ethereum.EventParam("lectureId", ethereum.Value.fromBytes(lectureId))
   )
   attendanceCreatedEvent.parameters.push(
-    new ethereum.EventParam("uri", ethereum.Value.fromString(uri))
+    new ethereum.EventParam(
+      "lecture_uri",
+      ethereum.Value.fromString(lecture_uri)
+    )
   )
   attendanceCreatedEvent.parameters.push(
     new ethereum.EventParam("topic", ethereum.Value.fromString(topic))
@@ -221,7 +224,7 @@ export function createattendanceCreatedEvent(
 }
 
 export function createattendanceOpenedEvent(
-  Id: Bytes,
+  openedId: Bytes,
   mentor: Address
 ): attendanceOpened {
   let attendanceOpenedEvent = changetype<attendanceOpened>(newMockEvent())
@@ -229,7 +232,7 @@ export function createattendanceOpenedEvent(
   attendanceOpenedEvent.parameters = new Array()
 
   attendanceOpenedEvent.parameters.push(
-    new ethereum.EventParam("Id", ethereum.Value.fromBytes(Id))
+    new ethereum.EventParam("openedId", ethereum.Value.fromBytes(openedId))
   )
   attendanceOpenedEvent.parameters.push(
     new ethereum.EventParam("mentor", ethereum.Value.fromAddress(mentor))
@@ -271,7 +274,7 @@ export function createstaffsRegisteredEvent(
 }
 
 export function createtopicEdittedEvent(
-  Id: Bytes,
+  editedId: Bytes,
   oldTopic: string,
   newTopic: string
 ): topicEditted {
@@ -280,7 +283,7 @@ export function createtopicEdittedEvent(
   topicEdittedEvent.parameters = new Array()
 
   topicEdittedEvent.parameters.push(
-    new ethereum.EventParam("Id", ethereum.Value.fromBytes(Id))
+    new ethereum.EventParam("editedId", ethereum.Value.fromBytes(editedId))
   )
   topicEdittedEvent.parameters.push(
     new ethereum.EventParam("oldTopic", ethereum.Value.fromString(oldTopic))

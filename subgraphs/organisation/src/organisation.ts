@@ -35,7 +35,7 @@ export function handleAttendanceSigned(event: AttendanceSignedEvent): void {
   let entity = new AttendanceSigned(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
-  entity.Id = event.params.Id;
+  entity.signedId = event.params.signedId;
   entity.signer = event.params.signer;
 
   entity.blockNumber = event.block.number;
@@ -147,7 +147,7 @@ export function handleattendanceClosed(event: attendanceClosedEvent): void {
   let entity = new attendanceClosed(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
-  entity.Id = event.params.Id;
+  entity.closedId = event.params.closedId;
   entity.mentor = event.params.mentor;
 
   entity.blockNumber = event.block.number;
@@ -162,7 +162,7 @@ export function handleattendanceCreated(event: attendanceCreatedEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
   entity.lectureId = event.params.lectureId;
-  entity.uri = event.params.uri.toString();
+  entity.lecture_uri = event.params.lecture_uri.toString();
   entity.topic = event.params.topic;
   entity.staff = event.params.staff;
 
@@ -177,7 +177,7 @@ export function handleattendanceOpened(event: attendanceOpenedEvent): void {
   let entity = new attendanceOpened(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
-  entity.Id = event.params.Id;
+  entity.openedId = event.params.openedId;
   entity.mentor = event.params.mentor;
 
   entity.blockNumber = event.block.number;
@@ -217,7 +217,7 @@ export function handletopicEditted(event: topicEdittedEvent): void {
   let entity = new topicEditted(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
-  entity.Id = event.params.Id;
+  entity.editedId = event.params.editedId;
   entity.oldTopic = event.params.oldTopic;
   entity.newTopic = event.params.newTopic;
 

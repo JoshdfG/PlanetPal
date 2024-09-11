@@ -19,16 +19,16 @@ library Event {
     event CampaignStopped(uint256 timestamp);
     event FundsLocked(address user, uint256 amount);
     event FundsPayout(address user, uint256 equalShare);
-    event AttendanceSigned(bytes Id, address signer);
+    event AttendanceSigned(bytes signedId, address signer);
     event attendanceCreated(
         bytes indexed lectureId,
         string indexed uri,
         string topic,
         address indexed staff
     );
-    event attendanceClosed(bytes Id, address mentor);
-    event topicEditted(bytes Id, string oldTopic, string newTopic);
-    event attendanceOpened(bytes Id, address mentor);
+    event attendanceClosed(bytes closedId, address mentor);
+    event topicEditted(bytes editedId, string oldTopic, string newTopic);
+    event attendanceOpened(bytes openedId, address mentor);
 
     event OrganisationCreated(
         address indexed Organisation,
@@ -43,5 +43,10 @@ library Event {
         address indexed organisation,
         address[] students,
         uint totalUsers
+    );
+    event UserCampaignRegistered(
+        string name,
+        address indexed user_address,
+        string email_address
     );
 }

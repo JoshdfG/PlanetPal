@@ -1,8 +1,8 @@
 {
   "base-sepolia": {
-    "organisation": {
-      "address": "0x5236Ab5de0c62E3807fc39c4653327225f281515",
-      "startBlock": 15116351
+    "organisationFactory": {
+      "address": "0x3af5D50447be0235D656D6f107668cFB27646289",
+      "startBlock": 15138113
     }
   }
 }

@@ -5,61 +5,22 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: organisation
+    name: organisationFactory
     network: base-sepolia
     source:
-      address: "0x5236Ab5de0c62E3807fc39c4653327225f281515"
-      abi: organisation
-      startBlock: 15116351
+      address: "0x3af5D50447be0235D656D6f107668cFB27646289"
+      abi: organisationFactory
+      startBlock: 15138113
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - AttendanceSigned
-        - CampaignCreated
-        - CampaignStopped
-        - Handover
-        - UserCampaignRegistered
-        - UserRegistered
-        - adminRemoved
-        - adminsRegistered
-        - attendanceClosed
-        - attendanceCreated
-        - attendanceOpened
-        - staffRemoved
-        - staffsRegistered
-        - topicEditted
+        - OrganisationCreated
       abis:
-        - name: organisation
-          file: ./abis/organisation.json
+        - name: organisationFactory
+          file: ./abis/organisationFactory.json
       eventHandlers:
-        - event: AttendanceSigned(bytes,address)
-          handler: handleAttendanceSigned
-        - event: CampaignCreated(string,address,uint256)
-          handler: handleCampaignCreated
-        - event: CampaignStopped(uint256)
-          handler: handleCampaignStopped
-        - event: Handover(address,address)
-          handler: handleHandover
-        - event: UserCampaignRegistered(string,indexed address,string)
-          handler: handleUserCampaignRegistered
-        - event: UserRegistered(uint256)
-          handler: handleUserRegistered
-        - event: adminRemoved(uint256)
-          handler: handleadminRemoved
-        - event: adminsRegistered(uint256)
-          handler: handleadminsRegistered
-        - event: attendanceClosed(bytes,address)
-          handler: handleattendanceClosed
-        - event: attendanceCreated(indexed bytes,indexed string,string,indexed address)
-          handler: handleattendanceCreated
-        - event: attendanceOpened(bytes,address)
-          handler: handleattendanceOpened
-        - event: staffRemoved(uint256)
-          handler: handlestaffRemoved
-        - event: staffsRegistered(uint256)
-          handler: handlestaffsRegistered
-        - event: topicEditted(bytes,string,string)
-          handler: handletopicEditted
-      file: ./src/organisation.ts
+        - event: OrganisationCreated(indexed address,indexed address,string,string,string)
+          handler: handleOrganisationCreated
+      file: ./src/organisation-factory.ts

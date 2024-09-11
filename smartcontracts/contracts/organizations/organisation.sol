@@ -71,11 +71,6 @@ contract organisation {
     mapping(address => bool) isPresent;
     Reg[] public registered_users_data;
     mapping(address => bool) is_registered_user;
-    event UserCampaignRegistered(
-        string name,
-        address indexed user_address,
-        string email_address
-    );
 
     /**
      * ============================================================ *
@@ -366,7 +361,7 @@ contract organisation {
         is_registered_user[_user.user_address] = true;
         isPresent[_user.user_address] = true;
 
-        emit UserCampaignRegistered(
+        emit Event.UserCampaignRegistered(
             _user.name,
             _user.user_address,
             _user.email_address

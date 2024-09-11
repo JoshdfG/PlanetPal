@@ -33,7 +33,7 @@ const useListClassesAttended = (student_address: any) => {
   }, [blockNumber, queryClient, queryKey]);
 
   const fetchClassesAttended = useCallback(() => {
-    if (classesAttendedData) {
+    if (classesAttendedData && Array.isArray(classesAttendedData)) {
       setClassesAttended(
         classesAttendedData.map((item: `0x${string}`) => Number(BigInt(item)))
       );
